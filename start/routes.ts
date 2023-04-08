@@ -18,8 +18,16 @@
 |
 */
 
+import './Routes/AuthRoute'
+
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
-})
+}).as('authpage')
+
+Route.group(() => {
+  Route.get('home', async ({ view }) => {
+    return view.render('home')
+  })
+}).middleware('auth')
