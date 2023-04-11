@@ -1,15 +1,19 @@
+import Application from '@ioc:Adonis/Core/Application'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class AuthController {
   async index({ view }: HttpContextContract) {
     return view.render('auth/signin')
   }
 
-  async store({ request }: HttpContextContract) {
+  async signUp({ request }: HttpContextContract) {
     const dto = schema.create({
-      username: schema.string(),
+      username: schema.string({}, [
+        rules.unique({ table: 'users', column: 'username', caseInsensitive: true }),
+      ]),
       password: schema.string(),
+      profile_image: schema.file({}, [rules.required()]),
     })
 
     const body = await request.validate({
@@ -19,10 +23,12 @@ export default class AuthController {
       },
     })
 
+    await body.profile_image.move(Application.tmpPath('uploads'))
+
     return body
   }
 
-  async signin({ request, auth, response, session }: HttpContextContract) {
+  async signIn({ request, auth, response, session }: HttpContextContract) {
     const { uid, password } = request.only(['uid', 'password'])
 
     const dto = schema.create({
@@ -50,6 +56,6 @@ export default class AuthController {
 
   async signOut({ response, auth }: HttpContextContract) {
     await auth.logout()
-    return response.redirect().toRoute('AuthController.index')
+    return response.redirect().toRoute('authpage')
   }
 }
