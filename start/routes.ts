@@ -18,6 +18,7 @@
 |
 */
 
+import './Routes/ProductRoute'
 import './Routes/AuthRoute'
 
 import Route from '@ioc:Adonis/Core/Route'

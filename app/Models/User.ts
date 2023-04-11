@@ -1,19 +1,23 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Product from './Product'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public email: string
+  public email!: string
 
   @column()
-  public username: string
+  public username!: string
 
   @column({ serializeAs: null })
-  public password: string
+  public password!: string
+
+  @hasMany(() => Product)
+  public products: HasMany<typeof Product>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

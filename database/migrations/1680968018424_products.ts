@@ -10,9 +10,9 @@ export default class extends BaseSchema {
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-
       table.string('product_name', 255).notNullable()
       table.uuid('product_id')
+      table.integer('user_id').unsigned().references('users.id').onDelete('RESTRICT')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

@@ -10,7 +10,10 @@ export default class Product extends BaseModel {
   public product_name: string
 
   @column()
-  public product_id?: string
+  public product_id: string
+
+  @column()
+  public userId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
