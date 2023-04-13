@@ -1,3 +1,10 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/products', 'ProductsController.index').as('products.index').middleware('auth')
+Route.group(() => {
+  Route.get('/', 'ProductsController.index').as('index').middleware('auth')
+  Route.get('/card', ({ view }) => {
+    return view.render('product/card')
+  }).as('card')
+})
+  .as('products')
+  .prefix('/product')

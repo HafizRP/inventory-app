@@ -8,3 +8,15 @@ body {
   color: #46444c;
   position: relative;
 }
+
+.btn:focus {
+  border: 0px !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+/* .accordion-button:not(.collapsed)::after {
+  display: none !important;
+} */

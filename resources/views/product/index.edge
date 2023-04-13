@@ -5,10 +5,6 @@
 
 @section('body')
 <main class="container mt-3">
-  {{-- <span>Halaman Semua barang</span> --}}
-
-
-
   <div class="row justify-content-center gap-2 mx-auto">
     <div class="col-12">
       <ul class="nav nav-tabs">
@@ -18,20 +14,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link {{active(active_tab, 'link')}}"
-            href="{{ route('products.index', { qs: { t: 'link' } }) }}">Link</a>
+            href="{{{ route('products.index', {qs: {t: 'link'}}) }}}">Link</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{active(active_tab, 'data')}}" href="{{
                 route('products.index', { qs: { t: 'data' } })}}">Data</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="{{ route('products.index', { qs: { t: 'link' } }) }}">Disabled</a>
-        </li>
       </ul>
     </div>
     @each(product in products)
     <div class="col">
-      <div class="card" style="width: 20rem;">
+      <div class="card" style="width: 30rem;">
         <img src="https://dummyimage.com/600x400/000/fff" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
