@@ -22,16 +22,16 @@
         </button>
         <div class="collapse navbar-collapse" id="main-navbar">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{route('authpage')}}">Home</a>
+            <li class="nav-item ">
+              <a class="nav-link {{active(title, 'Home')}}" aria-current="page" href="{{route('authpage')}}">Home</a>
             </li>
             @if(auth.user)
             <li class="nav-item">
-              <a class="nav-link {{title == 'Semua Barang' ? 'active' : ''}}"
-                href="{{ route('products.index') }}">Products</a>
+              <a class="nav-link {{active(title, 'Semua Barang')}}"
+                href="{{ route('products.index', { qs: { t:'all' }}) }}">Products</a>
             </li>
             @endif
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Dropdown
@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link disabled">Disabled</a>
-            </li>
+            </li> --}}
           </ul>
           <form class="d-flex" role="search">
 
@@ -63,8 +63,36 @@
     </nav>
   </header>
 
+  <div class="container my-2">
+    <div class="row">
+      <div class="col-3 p-2">
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">An active item</li>
+          <li class="list-group-item p-0">
+            <div class="dropdown">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+        </ul>
+      </div>
 
-  @!section('body')
+      <div class="col">
+        @!section('body')
+      </div>
+    </div>
+  </div>
+
+
 </body>
 
 
