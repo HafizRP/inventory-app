@@ -1,0 +1,99 @@
+{{-- <div class="px-3 py-2 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <li>
+          <a href="#" class="nav-link text-secondary" aria-current="true">
+            <i class="bi bi-house-fill d-block text-center fs-5"></i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-secondary">
+            <i class="bi bi-database-fill-gear d-block text-center fs-5"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#table"></use>
+            </svg>
+            Orders
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#grid"></use>
+            </svg>
+            Products
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#people-circle"></use>
+            </svg>
+            Customers
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div> --}}
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark rounded-bottom-2" data-bs-theme="dark">
+  <div class="container py-2">
+    <a class="navbar-brand">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar"
+      aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ">
+          <a class="nav-link {{active(title, 'Home')}}" aria-current="page" href="{{route('authpage')}}">Home</a>
+        </li>
+        @if(auth.user)
+        <li class="nav-item">
+          <a class="nav-link {{active(title, 'Semua Barang')}}"
+            href="{{ route('products.index', { qs: { t:'all' }}) }}">Products</a>
+        </li>
+        @endif
+        {{-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li> --}}
+      </ul>
+      <form class="d-flex" role="search">
+
+
+        @if(auth.user)
+        <a type="button" class="btn btn-danger" href="{{route('AuthController.signOut')}}">Sign Out</a>
+        @else
+        <a type="button" href={{ route('AuthController.index') }} class="btn btn-primary">Get Started</a>
+        @end
+      </form>
+    </div>
+  </div>
+</nav>
