@@ -17,6 +17,7 @@
 | import './routes/customer''
 |
 */
+import os from 'os'
 
 import './Routes/ProductRoute'
 import './Routes/AuthRoute'
@@ -29,6 +30,6 @@ Route.get('/', async ({ view }) => {
 
 Route.group(() => {
   Route.get('home', async ({ view }) => {
-    return view.render('home')
+    return view.render('home', { os })
   })
 }).middleware('auth')

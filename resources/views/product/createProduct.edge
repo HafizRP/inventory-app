@@ -1,0 +1,23 @@
+@layout('layouts/product')
+@set('title', 'Create Product')
+
+@section('body')
+{{inspect(flashMessages.all())}}
+<main class="container py-2">
+  <form action="{{route('products.create')}}" method="POST">
+    <div class="form-floating mb-3">
+      <input name="product_name" type="text"
+        class="form-control {{flashMessages.has('errors.product_name') ? 'is-invalid' : ''}}" id="floatingInputValue">
+      <label for="floatingInputValue">Name</label>
+      <span class="text-danger">{{flashMessages.get('errors.product_name') || ''}}</span>
+    </div>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Default file input example</label>
+      <input name="product_img" class="form-control {{flashMessages.has('errors.product_img') ? 'is-invalid' : ''}}"
+        accept="image/png, image/jpeg" type="file" id="formFile">
+      <span class="text-danger">{{flashMessages.get('errors.product_img') || ''}}</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</main>
+@endsection
