@@ -13,17 +13,11 @@
 
 <body>
   <header>
-    !@component('components/navbar')
-
-    @end
+    @!component('components/navbar', {title})
   </header>
 
-  <div class="container my-2">
-    <div class="row">
-      <div class="col">
-        @!section('body')
-      </div>
-    </div>
+  @!section('body')
+
   </div>
 
 

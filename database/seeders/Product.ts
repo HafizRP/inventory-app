@@ -7,14 +7,12 @@ export default class extends BaseSeeder {
       email: 'admin@gmail.com',
       password: 'admin',
     })
-    await user
-      .related('products')
-      .createMany([
-        { product_name: 'Flash Disk' },
-        { product_name: 'Hard Disk' },
-        { product_name: 'VGA Card' },
-        { product_name: 'Processor' },
-      ])
+    await user.related('products').createMany([
+      { product_name: 'Flash Disk', product_img: 'https://dummyimage.com/600x400/000/fff' },
+      { product_name: 'Hard Disk', product_img: 'https://dummyimage.com/600x400/000/fff' },
+      { product_name: 'VGA Card', product_img: 'https://dummyimage.com/600x400/000/fff' },
+      { product_name: 'Processor', product_img: 'https://dummyimage.com/600x400/000/fff' },
+    ])
     // Write your database queries inside the run method
   }
 }

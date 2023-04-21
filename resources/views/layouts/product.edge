@@ -9,16 +9,17 @@
   @entryPointScripts('app')
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
   <header>
-    @!component('components/navbar')
+    @!component('components/navbar', {title})
   </header>
 
   <div class="container my-2">
     <div class="row">
-      <div class="col-3 p-2">
+      {{-- <div class="col-3 p-2">
         <div class="d-flex flex-column flex-shrink-0 p-3">
           <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <span class="fs-4">Sidebar</span>
@@ -27,34 +28,34 @@
           <ul class="nav flex-column mb-auto">
             <li class="nav-item mb-1">
               <a href="#"
-                class="nav-link {{title == 'Semua Barang' ? 'border-primary border-start border-2' : 'link-dark'}}">
-                <i class="bi bi-house-door-fill px-2"></i>
+                class="nav-link {{title == 'Semua Barang' ? 'border-primary border-start border-2 fw-semibold' : 'link-dark'}}">
+                <i class="bi bi-house-door-fill pe-2"></i>
                 Home
               </a>
             </li>
             <li class="nav-item mb-1">
-              <a href="#" class="nav-link {{title == 'Test2' ? 'border-primary border-start border-2' : 'link-dark'}}">
-                <i class="bi bi-house-door-fill px-2"></i>
-                Home
-              </a>
-            </li>
-            <li class="nav-item mb-1">
-              <a class="nav-link {{title == 'Test' ? 'border-primary border-start border-2' : 'link-dark'}}"
+              <a class="d-inline nav-link {{sidebarActive(title, 'List Barang')}}" role="button" href="#"
                 data-bs-toggle="collapse" type="button" role="button" data-bs-target="#dashboard-collapse"
                 aria-expanded="true">
-                <i class="bi bi bi-database px-2"></i> Dashboard
+                <i class="bi bi bi-database pe-2"></i>
+                <span>Dashboard</span>
+                <i class="d-inline bi bi-caret-down-fill ps-5"></i>
               </a>
-              <div class="collapse show container" id="dashboard-collapse">
-                <ul class="nav-item btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li class="mb-1"><a href="#" class="nav-link link-dark rounded">Overview</a></li>
-                  <li class="mb-1"><a href="#" class="nav-link link-dark rounded">Weekly</a></li>
-                  <li class="mb-1"><a href="#" class="nav-link link-dark rounded">Monthly</a></li>
-                  <li class="mb-1"><a href="#" class="nav-link link-dark rounded">Annually</a></li>
+              <div class="container collapse show" id="dashboard-collapse">
+                <ul class="container nav-item btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li class="pb-1 border-start border-2"><a href="#"
+                      class="nav-link {{title == 'Semua Barang' ? 'fw-semibold' : 'link-dark'}} rounded">Overview</a>
+                  </li>
+                  <li class="pb-1 border-start border-2"><a href="#" class="nav-link link-dark rounded">Weekly</a></li>
+                  <li class="pb-1 border-start border-2"><a href="#" class="nav-link link-dark rounded">Monthly</a></li>
+                  <li class="pb-1 border-start border-2"><a href="#" class="nav-link link-dark rounded">Annually</a>
+                  </li>
                 </ul>
               </div>
             </li>
-            <li class="mb-1">
+            <li class="nav-item mb-1">
               <a href="#" class="nav-link link-dark">
+                <i class="bi bi-person-add pe-2"></i>
                 Customers
               </a>
             </li>
@@ -77,7 +78,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <div class="col">
         @!section('body')
@@ -86,12 +87,22 @@
   </div>
 
 
-</body>
+  {{-- <div class="container sticky-bottom text-end pb-3">
+    <a type="button" href="{{route('products.view.create')}}" class="btn fs-3 btn-primary rounded-5">
+      <i class="bi bi-plus-circle"></i>
+    </a>
+  </div> --}}
 
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-  integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-  integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+  <script>
+    AOS.init();
+  </script>
 
 </html>
