@@ -29,14 +29,12 @@ export default class AuthController {
   }
 
   async signIn({ request, auth, response, session }: HttpContextContract) {
-    const { uid, password } = request.only(['uid', 'password'])
-
     const dto = schema.create({
       uid: schema.string(),
       password: schema.string(),
     })
 
-    await request.validate({
+    const { uid, password } = await request.validate({
       schema: dto,
       messages: {
         'uid.required': 'Username or email is required!',
@@ -57,5 +55,9 @@ export default class AuthController {
   async signOut({ response, auth }: HttpContextContract) {
     await auth.logout()
     return response.redirect().toRoute('authpage')
+  }
+
+  async signUpView({ view }: HttpContextContract) {
+    return view.render('auth/signup')
   }
 }

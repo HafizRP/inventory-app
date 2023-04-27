@@ -2,6 +2,7 @@ import User from 'App/Models/User'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 export default class extends BaseSeeder {
   public async run() {
+    // Write your database queries inside the run method
     const user = await User.create({
       username: 'Admin',
       email: 'admin@gmail.com',
@@ -13,6 +14,5 @@ export default class extends BaseSeeder {
       { product_name: 'VGA Card', product_img: 'https://dummyimage.com/600x400/000/fff' },
       { product_name: 'Processor', product_img: 'https://dummyimage.com/600x400/000/fff' },
     ])
-    // Write your database queries inside the run method
   }
 }
