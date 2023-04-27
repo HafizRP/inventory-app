@@ -17,8 +17,15 @@
   width: 500px !important;
 }
 
-/* @media only screen and (max-width: 768px) {
+.search-result {
+  width: 500px;
+}
+
+@media only screen and (max-width: 768px) {
   #searchbar-input {
-    width: 500px !important;
+    width: auto !important;
   }
-} */
+  .search-result {
+    width: 300px;
+  }
+}
