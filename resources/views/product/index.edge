@@ -34,7 +34,7 @@
     @each(product in products)
     <div class="col-12 col-sm-4">
       <div class="card mx-auto">
-        <img src="{{product.product_img}}" class="card-img-top" alt="{{product.product_name}}">
+        <img src="/uploads/{{product.product_img}}" class="card-img-top" alt="{{product.product_name}}">
         <div class="card-body">
           <h5 class="card-title">{{product.product_name}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
@@ -46,6 +46,20 @@
     </div>
     @end
   </div>
+
+  <nav class="mt-3" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link {{products.currentPage != products.firstPage || 'disabled'}}"
+          href="/product?page={{products.currentPage - 1}}">Previous</a>
+      </li>
+      @each(anchor in products.getUrlsForRange(1, products.lastPage))
+      <li class="page-item"><a class="page-link {{!anchor.isActive || 'active'}}" href="{{anchor.url}}">{{anchor.page}}
+          @endeach
+      <li class="page-item"><a class="page-link {{products.currentPage != products.lastPage || 'disabled'}}"
+          href='/product?page={{products.currentPage + 1}}'>Next</a>
+      </li>
+    </ul>
+  </nav>
 </main>
 
 <div class="container sticky-bottom text-end pb-3">

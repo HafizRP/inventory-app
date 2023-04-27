@@ -4,12 +4,14 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from 'App/Models/Product'
 
 export default class ProductsController {
-  async index({ view }: HttpContextContract) {
-    return view.render('product/index', { products: await Product.all() })
+  async index({ view, request }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const products = await Product.query().paginate(page, 4)
+    products.baseUrl('/product')
+    return view.render('product/index', { products })
   }
 
-  async create({ request, response }: HttpContextContract) {
-    console.log(request.all())
+  async create({ request, response, session }: HttpContextContract) {
     const body = await request.validate({
       schema: schema.create({
         product_img: schema.file(),
@@ -22,10 +24,14 @@ export default class ProductsController {
 
     await body.product_img.move(Application.tmpPath('uploads'))
 
-    await Product.create({
+    const product = await Product.create({
       product_name: body.product_name,
       product_img: body.product_img.fileName,
     })
+
+    try {
+      await product.save()
+    } catch (error) {}
 
     return response.redirect().toRoute('products.index')
   }
