@@ -6,12 +6,12 @@ import Product from 'App/Models/Product'
 export default class ProductsController {
   async index({ view, request }: HttpContextContract) {
     const page = request.input('page', 1)
-    const products = await Product.query().paginate(page, 4)
+    const products = await Product.query().paginate(page, 20)
     products.baseUrl('/product')
     return view.render('product/index', { products })
   }
 
-  async create({ request, response, session }: HttpContextContract) {
+  async create({ request, response }: HttpContextContract) {
     const body = await request.validate({
       schema: schema.create({
         product_img: schema.file(),
@@ -34,5 +34,13 @@ export default class ProductsController {
     } catch (error) {}
 
     return response.redirect().toRoute('products.index')
+  }
+
+  async createView({ view }: HttpContextContract) {
+    return view.render('product/create-product')
+  }
+
+  async getProducts() {
+    return Product.all()
   }
 }

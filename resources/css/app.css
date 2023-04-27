@@ -12,3 +12,13 @@
   background-image: inherit !important;
   box-shadow: inherit !important;
 }
+
+#searchbar-input {
+  width: 500px !important;
+}
+
+/* @media only screen and (max-width: 768px) {
+  #searchbar-input {
+    width: 500px !important;
+  }
+} */
