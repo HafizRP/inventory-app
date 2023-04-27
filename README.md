@@ -22,11 +22,11 @@ $ npm run dev
 
 ```bash
 DB_CONNECTION=pg
-PG_HOST=localhost
-PG_PORT=5432
+PG_HOST=containers-us-west-78.railway.app
+PG_PORT=6786
 PG_USER=postgres
-PG_PASSWORD=kepoloe123
-PG_DB_NAME=adonis-app
+PG_PASSWORD=ckERvP9v6E7i6TVidDbw
+PG_DB_NAME=railway
 ```
 
 4. Jalankan migration
