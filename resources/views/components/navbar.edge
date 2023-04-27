@@ -66,64 +66,33 @@
       aria-controls="offcanvasNavbar2">
       <span class="navbar-toggler-icon"></span>
     </button>
-    {{-- <li class="nav-item d-block d-md-none">
-      <form class="input-group" action="{{route('products.index')}}" method="GET">
-        <input name="keyword" type="text" class="form-control" id="searchbar-input" placeholder="Recipient's username"
-          autocomplete="off" aria-label="Recipient's username" aria-describedby="button-addon2" style="width: 500px">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
-
-      <div class="z-2 position-relative" role="listbox">
-        <ul class="list-group d-none search-result position-absolute">
-          <a class="px-0 list-group-item list-group-item-action"></a>
-          <a class="px-0 list-group-item list-group-item-action"></a>
-          <a class="px-0 list-group-item list-group-item-action"></a>
-          <a class="px-0 list-group-item list-group-item-action"></a>
-          <a class="px-0 list-group-item list-group-item-action"></a>
+    <form class="px-2 d-flex nav-item my-auto d-block d-md-none" role="search">
+      @if(auth.user)
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        </a>
+        <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2">
+          <li><a class="dropdown-item" href="#">Dashboard</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item text-danger" href="{{ route('auth.signout') }}">Sign out</a></li>
         </ul>
       </div>
-    </li> --}}
-    <div class="dropdown d-block d-md-none">
-      <a href="#" class="align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-      </a>
-      <ul class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">Dashboard</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item text-danger" href="{{ route('auth.signout') }}">Sign out</a></li>
-      </ul>
-    </div>
+      @else
+      <a href={{ route('AuthController.index') }}
+        class="nav-link link-dark bg-warning px-3 py-1 rounded-5 fw-semibold">Get
+        Started</a>
+      @end
+    </form>
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbar2"
       aria-labelledby="offcanvasNavbar2Label">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-        {{-- <div>
-          <form class="input-group" action="{{route('products.index')}}" method="GET">
-            <input name="keyword" type="text" class="form-control" id="searchbar-input"
-              placeholder="Recipient's username" autocomplete="off" aria-label="Recipient's username"
-              aria-describedby="button-addon2" style="max-width:fit-content">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-              <i class="bi bi-search"></i>
-            </button>
-          </form>
-
-          <div class="z-2 position-relative" role="listbox">
-            <ul class="list-group d-none search-result position-absolute" style="width: 300px">
-              <a class="px-0 list-group-item list-group-item-action"></a>
-              <a class="px-0 list-group-item list-group-item-action"></a>
-              <a class="px-0 list-group-item list-group-item-action"></a>
-              <a class="px-0 list-group-item list-group-item-action"></a>
-              <a class="px-0 list-group-item list-group-item-action"></a>
-            </ul>
-          </div>
-        </div> --}}
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -133,14 +102,14 @@
             <form class="input-group" action="{{route('products.index')}}" method="GET">
               <input name="keyword" type="text" class="form-control" id="searchbar-input"
                 placeholder="Recipient's username" autocomplete="off" aria-label="Recipient's username"
-                aria-describedby="button-addon2" style="width: auto">
+                aria-describedby="button-addon2">
               <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                 <i class="bi bi-search"></i>
               </button>
             </form>
 
             <div class="z-2 position-relative" role="listbox">
-              <ul class="list-group d-none search-result position-absolute" style="width: 500px">
+              <ul class="list-group d-none search-result position-absolute">
                 <a class="px-0 list-group-item list-group-item-action"></a>
                 <a class="px-0 list-group-item list-group-item-action"></a>
                 <a class="px-0 list-group-item list-group-item-action"></a>
@@ -154,12 +123,9 @@
             <a class="nav-link {{active(title, 'Semua Barang')}}" href="{{ route('products.index') }}">Products</a>
           </li>
           @endif --}}
-
-
-
-          <form class="px-2 d-flex nav-item my-auto" role="search">
+          <form class="px-2 d-flex nav-item my-auto d-none d-md-block" role="search">
             @if(auth.user)
-            <div class="dropdown d-none d-md-block">
+            <div class="dropdown">
               <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
                 id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -184,7 +150,5 @@
       </div>
     </div>
 
-  </div>
-  </div>
   </div>
 </nav>
