@@ -8,16 +8,21 @@
   @include('partials/header')
 </head>
 
-<body>
-  <header>
-    @!component('components/navbar', {title})
-  </header>
+<body onload="myFunction()">
+  {{-- @include('components/preloader') --}}
 
-  <div class="container my-2">
-    @!section('body')
+  <div id="main-content">
+    <header>
+      @!component('components/navbar', {title})
+    </header>
+
+    <div class="container my-2">
+      @!section('body')
+    </div>
   </div>
 
   @include('partials/javascript')
+  {{-- @include('partials/preloader-js') --}}
 </body>
 
 </html>
