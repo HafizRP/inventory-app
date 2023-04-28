@@ -1,0 +1,11 @@
+<script>
+  var myVar;
+  function myFunction() {
+myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+document.getElementById("preloader").classList.add('d-none')
+document.getElementById("main-content").style.display = "block";
+}
+</script>
