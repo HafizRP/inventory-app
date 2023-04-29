@@ -5,8 +5,9 @@ import Product from 'App/Models/Product'
 
 export default class ProductsController {
   async index({ view, request }: HttpContextContract) {
+    const { keyword } = request.qs()
     const page = request.input('page', 1)
-    const products = await Product.query().paginate(page, 20)
+    const products = await Product.query().where('product_name', keyword).paginate(page, 20)
     products.baseUrl('/product')
     return view.render('product/index', { products })
   }
