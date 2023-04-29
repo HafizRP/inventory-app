@@ -36,15 +36,15 @@ searchBar.addEventListener('input', async (v) => {
 
 
     searchResults.forEach((li, i) => {
-      console.log(product)
       if (i >= product.length) {
         li.classList.add('d-none')
       } else {
         li.classList.add('d-block')
         li.classList.remove('d-none')
-        li.href = `/product?q=${product[i].product_name}`
         li.innerHTML = '<i class="bi bi-search px-2"></i>' + product[i].product_name
-        // li.innerText = product[i].product_name
+        li.addEventListener('click', (e) => {
+          searchBar.value = e.target.textContent
+        })
       }
 
     })
