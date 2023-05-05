@@ -74,13 +74,13 @@
   <nav class="mt-3">
     <ul class="pagination justify-content-center">
       <li class="page-item"><a class="page-link {{products.currentPage != products.firstPage || 'disabled'}}"
-          href="/product?page={{products.currentPage - 1}}">&laquo;</a>
+          href="{{products.getPreviousPageUrl()}}">&laquo;</a>
       </li>
       @each(anchor in products.getUrlsForRange(1, products.lastPage))
       <li class="page-item"><a class="page-link {{!anchor.isActive || 'active'}}" href="{{anchor.url}}">{{anchor.page}}
           @endeach
       <li class="page-item"><a class="page-link {{products.currentPage != products.lastPage || 'disabled'}}"
-          href='/product?page={{products.currentPage + 1}}'>&raquo;</a>
+          href='{{products.getNextPageUrl()}}'>&raquo;</a>
       </li>
     </ul>
   </nav>
