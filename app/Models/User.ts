@@ -16,6 +16,15 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password!: string
 
+  @column()
+  public profile_url! : string
+
+  @column()
+  public first_name!: string
+
+  @column()
+  public last_name!: string
+
   @hasMany(() => Product)
   public products: HasMany<typeof Product>
 

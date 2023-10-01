@@ -10,7 +10,7 @@
 
 import View from '@ioc:Adonis/Core/View'
 
-View.global('active', (title, tab) => {
+View.global('active', (title: string, tab: string) => {
   return title === tab ? 'active' : ''
 })
 
