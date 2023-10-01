@@ -32,4 +32,4 @@ Route.group(() => {
   Route.get('home', async ({ view }) => {
     return view.render('home', { os })
   })
-}).middleware('auth')
+}).middleware("auth")

@@ -3,5 +3,91 @@
 
 @section('body')
 <main class="container">
+    {{inspect(flashMessages.all())}}
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div>
+            <div class="header py-3">
+                @if(flashMessages.has('form'))
+                <div class="alert alert-danger" role="alert">
+                    {{flashMessages.get('form')}}
+                </div>
+                @endif
+                <span class="d-block fw-semibold fs-3 text-center">Create New Account</span>
+            </div>
+            <div class="body">
+                <form method="post" action="{{route('auth.signup')}}" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col">
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" class="form-control"
+                                value="{{flashMessages.get('first_name') || ''}}">
+                            @if(flashMessages.has('errors.first_name'))
+                            <span class="label-invalid">{{flashMessages.get('errors.first_name')}}</span>
+                            @endif
+                        </div>
+
+                        <div class="col">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" value="{{flashMessages.get('last_name') || ''}}"
+                                class="form-control">
+                            @if(flashMessages.has('errors.last_name'))
+                            <span class="label-invalid">
+                                {{flashMessages.get('errors.last_name')}}
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="my-2">
+                        <label class="d-block" for="">Email</label>
+                        <input type="email" value="{{flashMessages.get('email') || ''}}" name="email"
+                            class="form-control">
+
+                        @if(flashMessages.has('errors.email'))
+                        <span class="label-invalid">
+                            {{flashMessages.get('errors.email')}}
+                        </span>
+                        @endif
+                    </div>
+
+                    <div class="my-2">
+                        <label class="d-block" for="">Username</label>
+                        <input type="text" name="username" value="{{flashMessages.get('username') || ''}}"
+                            class="form-control">
+                        @if(flashMessages.has('errors.username'))
+                        <span class="label-invalid">
+                            {{flashMessages.get('errors.username')}}
+                        </span>
+                        @endif
+                    </div>
+
+
+                    <div class="my-2">
+                        <label for="">Password</label>
+                        <input type="password" value="{{flashMessages.get('password') || ''}}" class="form-control"
+                            name="password">
+                        @if(flashMessages.has('errors.password'))
+                        <span class="label-invalid">
+                            {{flashMessages.get('errors.password')}}
+                        </span>
+                        @endif
+                    </div>
+
+                    <div class="my-2">
+                        <label for="">Profile</label>
+                        <input type="file" class="form-control" value="{{flashMessages.get('profile_image')}}"
+                            name="profile_image" accept="image/*">
+                        @if(flashMessages.has('errors.profile_image'))
+                        <span class="label-invalid">
+                            {{flashMessages.get('errors.profile_image')}}
+                        </span>
+                        @endif
+                    </div>
+
+                    <button class="btn btn-primary mt-2 w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 @endsection

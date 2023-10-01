@@ -1,31 +1,50 @@
 import Application from '@ioc:Adonis/Core/Application'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import User from 'App/Models/User'
 
 export default class AuthController {
   async index({ view }: HttpContextContract) {
     return view.render('auth/signin')
   }
 
-  async signUp({ request }: HttpContextContract) {
+  async signUp({ request, session, response }: HttpContextContract) {
     const dto = schema.create({
-      username: schema.string({}, [
-        rules.unique({ table: 'users', column: 'username', caseInsensitive: true }),
-      ]),
+      username: schema.string({}, [rules.unique({ table: 'users', column: 'username', caseInsensitive: true })]),
+      email: schema.string({}, [rules.unique({ table: 'users', column: 'email', caseInsensitive: true }), rules.email()]),
+      first_name: schema.string(),
+      last_name: schema.string(),
       password: schema.string(),
-      profile_image: schema.file({}, [rules.required()]),
+      profile_image: schema.file({
+        size: "10mb",
+        extnames: ['jpg', 'png']
+      }),
     })
 
-    const body = await request.validate({
+    const { first_name, last_name, password, profile_image, username, email } = await request.validate({
       schema: dto,
       messages: {
         required: 'The {{ field }} is required!',
+        'first_name.required': "First Name required!",
+        'last_name.required': "Last Name required!",
+        'profile_image.required': "Profile Image required!",
+        'username.unique': "Username is already used!",
+        'email.unique': 'Email is already used!'
       },
     })
 
-    await body.profile_image.move(Application.tmpPath('uploads'))
+    try {
+      await User.create({ last_name, first_name, password, username, email, profile_url: profile_image.filePath })
+      await profile_image.move(Application.tmpPath('uploads'))
+    } catch (error) {
+      console.log(error)
+      session.flash("form", "Server Error, Please Wait")
+      return response.redirect().back()
+    }
 
-    return body
+
+    return response.redirect().toRoute('auth.view.signin')
+
   }
 
   async signIn({ request, auth, response, session }: HttpContextContract) {
